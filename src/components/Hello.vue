@@ -8,12 +8,31 @@
       <span v-if="online">Online</span>
       <span v-else>Offline</span>
 
-      <span style="margin-left: 20px; width: 100px" v-if="online">
-        <label for="port" style="margin-right: 10px">Backend Port:</label>
-        <input id="port" type="number" min="1024" v-model="backendPort" style="width: 80px" />
-      </span>
+      <i class="material-icons" style="margin-left: 10px; cursor: pointer" v-on:click="active = true" >settings</i>
+
+<!--      <span style="margin-left: 20px; width: 100px"> -->
+<!--        <label for="port" style="margin-right: 10px">Backend Port:</label>-->
+<!--        <input id="port" type="number" min="1024" v-model="backendPort" style="width: 80px" />-->
+<!--      </span>-->
 
     </md-toolbar>
+    <div>
+      <md-modal-dialog>
+        <md-dialog-title>Guess a number</md-dialog-title>
+
+        <md-dialog-content>
+          <md-field>
+            <label>A number</label>
+            <md-input type="number" v-model="number" />
+          </md-field>
+        </md-dialog-content>
+
+        <md-dialog-actions>
+          <md-button @click="$modal.submit(number)">Submit</md-button>
+          <md-button @click="$modal.cancel()">Cancel</md-button>
+        </md-dialog-actions>
+      </md-modal-dialog>
+    </div>
     <div class="hello">
       <img class="cactus" :src="cactusList[hello_count % cactusList.length]">
       <h1 v-if="hello_count > 1">{{ hello_count }} people say hello !</h1>
@@ -58,6 +77,9 @@
       }
     },
     methods: {
+      plop () {
+        console.log('plopped')
+      },
       switchOnline (online) {
         if (online) {
           this.fetchHellos()
@@ -110,7 +132,9 @@
           'https://s-media-cache-ak0.pinimg.com/564x/da/82/d3/da82d3b0faeb4e149828bbca33bd0df8.jpg',
           'https://s-media-cache-ak0.pinimg.com/originals/0b/eb/c9/0bebc9acab2231083c2e26c7a9641686.jpg',
           'https://s-media-cache-ak0.pinimg.com/originals/79/f5/0a/79f50af033de6d51461604f1f3a497d9.jpg'
-        ]
+        ],
+        active: false,
+        value: 11
       }
     }
   }
